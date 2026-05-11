@@ -153,4 +153,9 @@ public class MyDodo extends Dodo
     turn180();
     return result; 
     }
+    public void gotoEgg() {
+    while (!onEgg()) {
+        move();        
+    }
+}
 }

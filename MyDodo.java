@@ -145,4 +145,12 @@ public class MyDodo extends Dodo
     move();      
     turnLeft();  
     }
+    public boolean grainAhead() {
+    move();
+    boolean result = onGrain(); 
+    turn180();
+    move();
+    turn180();
+    return result; 
+    }
 }

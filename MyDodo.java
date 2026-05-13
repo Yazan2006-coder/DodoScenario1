@@ -107,8 +107,8 @@ public class MyDodo extends Dodo
 
     public void walkToWorldEdgePrintingCoordinates( ){
         while( ! borderAhead() ){
-            System.out.println("x: " + getX() + ", y: " + getY());
-            move();
+            System.out.println("x: " + getX() + ", y: " + getY()); //print cooardinates
+            move(); //move
         }
     }
 
@@ -126,36 +126,37 @@ public class MyDodo extends Dodo
 
     public boolean canLayEgg( ){
         if( onEgg() ){
-            return false;
+            return false; // er ligt al een ei dus kan geen ei leggen
         }else{
-            return true;
+            return true; // geen ei aanwezig dus kan wel een ei leggen
         }
     }
     public void turn180() {
-        turnRight();
-        turnRight();
+        turnRight(); // draait een kwartslag rechts
+        turnRight(); // tweede kwartslag rechts dus nu 180 graden gedraaid
     }
     public void climbOverFence() {
-    turnLeft();
-    move();      
-    turnRight(); 
-    move();
-    move();
-    turnRight(); 
-    move();      
-    turnLeft();  
+    turnLeft();  // draai naar boven
+    move(); // stap omhoog 
+    turnRight(); // draai naar rechts
+    move(); // stap over het hek
+    move(); // een stap verder
+    turnRight(); // draai naar beneden
+    move(); // stap omlaag     
+    turnLeft(); // draai terug naar rechts
     }
     public boolean grainAhead() {
-    move();
-    boolean result = onGrain(); 
+    move(); // stap vooruit
+    boolean result = onGrain(); // check grain
+    // terug naar beginpositie
     turn180();
     move();
     turn180();
-    return result; 
+    return result; // true of false
     }
     public void gotoEgg() {
-    while (!onEgg()) {
-        move();        
+    while (!onEgg()) { // nog niet op een ei
+        move(); // zet een stap       
     }
 }
 }

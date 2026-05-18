@@ -164,4 +164,13 @@ public class MyDodo extends Dodo
     walkToWorldEdgePrintingCoordinates();// loop naar het begin van de rij
     turn180();// draai terug naar originele richting
 }
+    public void walkToWorldEdgeClimbingOverFences() {
+    while (!borderAhead()) {        // zolang geen rand voor Mimi
+        if (fenceAhead()) {
+            climbOverFence();       // klim erover
+        } else {
+            move();                 // stap vooruit
+        }
+    }
+}
 }

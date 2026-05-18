@@ -149,10 +149,9 @@ public class MyDodo extends Dodo
     move(); // stap vooruit
     boolean result = onGrain(); // check grain
     // terug naar beginpositie
-    turn180();
-    move();
-    turn180();
-    return result; // true of false
+    stepOneCellBackwards(); // terug naar beginpositie
+
+    return result;
     }
     public void gotoEgg() {
     while (!onEgg()) { // nog niet op een ei
@@ -187,5 +186,10 @@ public void pickUpGrainsAndPrintCoordinates() {
             pickUpGrainsAndPrintCoordinates();
         }
     }
+}
+    public void stepOneCellBackwards() {
+    turn180(); // 180 graden draaien
+    move();    // een stap zetten
+    turn180(); // weer 180 graden draaien
 }
 }

@@ -159,4 +159,9 @@ public class MyDodo extends Dodo
         move(); // zet een stap       
     }
 }
+    public void goBackToStartOfRowAndFaceBack() {
+    turn180();// draai om
+    walkToWorldEdgePrintingCoordinates();// loop naar het begin van de rij
+    turn180();// draai terug naar originele richting
+}
 }

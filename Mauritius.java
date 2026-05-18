@@ -173,7 +173,7 @@ public class Mauritius extends World
     }
 
     public void saveToFile() {
-        WorldWriter writer = new WorldWriter ( "saved.txt" );
+        WorldWriter writer = new WorldWriter ( "mijnWereld.txt" );
         try {
             writer.write( String.format("%d %d\n", WORLD_WIDTH, WORLD_HEIGHT) );
             for ( int y = 0; y < WORLD_HEIGHT; y++ ) {

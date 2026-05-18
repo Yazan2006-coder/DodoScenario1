@@ -173,4 +173,19 @@ public class MyDodo extends Dodo
         }
     }
 }
+public void pickUpGrainsAndPrintCoordinates() {
+    // check huidige cel (eerste cel)
+    if (onGrain()) {
+        pickUpGrain();
+        System.out.println("x: " + getX() + ", y: " + getY());
+    }
+
+    while (!borderAhead()) {
+        move();
+
+        if (onGrain()) {
+            pickUpGrainsAndPrintCoordinates();
+        }
+    }
+}
 }

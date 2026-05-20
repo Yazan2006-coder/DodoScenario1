@@ -201,4 +201,14 @@ public void pickUpGrainsAndPrintCoordinates() {
         }
     }
 }
+    public void walkToNestClimbingOverFences() {
+    while (!onNest()) {
+        if (fenceAhead()) {
+            climbOverFence();
+        } else {
+            move();
+        }
+    }
+    layEgg(); // ei leggen als er een nest wordt gevonden
+}
 }

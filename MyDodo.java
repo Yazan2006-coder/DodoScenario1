@@ -192,4 +192,13 @@ public void pickUpGrainsAndPrintCoordinates() {
     move();    // een stap zetten
     turn180(); // weer 180 graden draaien
 }
+    public void worldEmptyNestsTopRow(){
+    // check huidige cel eerst
+    while (!borderAhead()) {
+        move();
+        if (onNest() && !onEgg()) {
+            layEgg();
+        }
+    }
+}
 }

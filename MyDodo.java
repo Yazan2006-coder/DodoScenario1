@@ -124,45 +124,68 @@ public class MyDodo extends Dodo
      *                      (already an egg in the cell)
      */
 
-    public boolean canLayEgg( ){
+        public boolean canLayEgg( ){
         if( onEgg() ){
             return false; // er ligt al een ei dus kan geen ei leggen
         }else{
             return true; // geen ei aanwezig dus kan wel een ei leggen
         }
     }
-    public void turn180() {
+    /**
+     * Makes mimi turn around to the opposite direction
+     */
+    
+        public void turn180() {
         turnRight(); // draait een kwartslag rechts
         turnRight(); // tweede kwartslag rechts dus nu 180 graden gedraaid
     }
-    public void climbOverFence() {
-    turnLeft();  // draai naar boven
-    move(); // stap omhoog 
-    turnRight(); // draai naar rechts
-    move(); // stap over het hek
-    move(); // een stap verder
-    turnRight(); // draai naar beneden
-    move(); // stap omlaag     
-    turnLeft(); // draai terug naar rechts
+    /**
+     * Mimi can climb over fence if there is a fence ahead
+     */
+        public void climbOverFence() {
+        turnLeft();  // draai naar boven
+        move(); // stap omhoog 
+        turnRight(); // draai naar rechts
+        move(); // stap over het hek
+        move(); // een stap verder
+        turnRight(); // draai naar beneden
+        move(); // stap omlaag     
+        turnLeft(); // draai terug naar rechts
     }
-    public boolean grainAhead() {
-    move(); // stap vooruit
-    boolean result = onGrain(); // check grain
-    // terug naar beginpositie
-    stepOneCellBackwards(); // terug naar beginpositie
+    /**
+     * checks if there is a grain ahead. if there is a grain ahead, 
+     * you get the result true
+     */
+        public boolean grainAhead() {
+        move(); // stap vooruit
+        boolean result = onGrain(); // check grain
+        // terug naar beginpositie
+        stepOneCellBackwards(); // terug naar beginpositie
 
-    return result;
+        return result;
     }
+    /**
+     * mimi will keep walking until she finds and egg, when she find an egg
+     * she stops.
+     */
     public void gotoEgg() {
     while (!onEgg()) { // nog niet op een ei
         move(); // zet een stap       
     }
 }
+    /**
+     * Mimi will turn around and walk to the edge of the world, and afterwards
+     * turn around to the original direction
+     */
     public void goBackToStartOfRowAndFaceBack() {
     turn180();// draai om
     walkToWorldEdgePrintingCoordinates();// loop naar het begin van de rij
     turn180();// draai terug naar originele richting
 }
+    /**
+     * Mimi will keep moving until she finds a fence, when she finds a fence 
+     * she will climb over it.
+     */
     public void walkToWorldEdgeClimbingOverFences() {
     while (!borderAhead()) {        // zolang geen rand voor Mimi
         if (fenceAhead()) {
@@ -172,26 +195,36 @@ public class MyDodo extends Dodo
         }
     }
 }
-public void pickUpGrainsAndPrintCoordinates() {
+    /**
+     * Mimi will walk to the edge of the world and look for grains, when she
+     * walks over the grains the cooardinates will be printed
+     */
+    public void pickUpGrainsAndPrintCoordinates() {
     // check huidige cel (eerste cel)
     if (onGrain()) {
         pickUpGrain();
         System.out.println("x: " + getX() + ", y: " + getY());
     }
-
     while (!borderAhead()) {
         move();
-
         if (onGrain()) {
             pickUpGrainsAndPrintCoordinates();
         }
     }
 }
+    /**
+     * Mimi will turn 180 degress and take a step backwards, afterwards take
+     * another 180 degrees turn and face the original direction.
+     */
     public void stepOneCellBackwards() {
     turn180(); // 180 graden draaien
     move();    // een stap zetten
     turn180(); // weer 180 graden draaien
 }
+    /**
+     * Mimi will walk to the edge of the world and lay eggs on nests she
+     * finds ahead.
+     */
     public void worldEmptyNestsTopRow(){
     // check huidige cel eerst
     while (!borderAhead()) {
@@ -201,6 +234,10 @@ public void pickUpGrainsAndPrintCoordinates() {
         }
     }
 }
+    /**
+     * Mimi will look for nests and lay eggs on them. she will climb fences
+     * when she finds fences ahead.
+     */
     public void walkToNestClimbingOverFences() {
     while (!onNest()) {
         if (fenceAhead()) {
@@ -210,5 +247,28 @@ public void pickUpGrainsAndPrintCoordinates() {
         }
     }
     layEgg(); // ei leggen als er een nest wordt gevonden
+}
+    /**
+     * Mimi will lay an egg and walk around the fenced area and stop at
+     * the cell where the egg was placed.
+     */
+    public void walkAroundFencedArea() {
+    layEgg(); //ei leggen
+    move(); // eerst wegstappen van het ei
+    while (!onEgg()) {
+        if (fenceAhead()) {
+            turnLeft();
+        } else {
+            turnRight();
+            boolean hekRechts = fenceAhead();
+            turnLeft();
+            if (hekRechts) {
+                move();
+            } else {
+                turnRight();
+                move();
+            }
+        }
+    }
 }
 }

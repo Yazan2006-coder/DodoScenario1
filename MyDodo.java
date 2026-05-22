@@ -253,21 +253,24 @@ public class MyDodo extends Dodo
      * the cell where the egg was placed.
      */
     public void walkAroundFencedArea() {
-    layEgg(); //ei leggen
+    layEgg(); // ei leggen
     move(); // eerst wegstappen van het ei
     while (!onEgg()) {
-        if (fenceAhead()) {
-            turnLeft();
-        } else {
-            turnRight();
-            boolean hekRechts = fenceAhead();
-            turnLeft();
-            if (hekRechts) {
-                move();
+        // kijk naar rechts
+        turnRight();
+        boolean hekRechts = fenceAhead();
+        turnLeft();
+        if (hekRechts) {
+            // hek rechts
+            if (fenceAhead()) {
+                turnLeft();  // draai links
             } else {
-                turnRight();
-                move();
+                move();      // vrij voor = loop door
             }
+        } else {
+            // draai rechts om de buitenhoek
+            turnRight();
+            move();
         }
     }
 }

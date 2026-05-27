@@ -295,5 +295,14 @@ public class MyDodo extends Dodo
         walkToNextEgg();
     }
     }
+    public void solveMaze() {
+    while (!onNest()) {
+        turnLeft(); // nooit achteruit, begin met links
+        while (fenceAhead()) {
+            turnRight(); // draai totdat er een vrije weg is
+        }
+        move(); // zet een stap de vrije richting in
+    }
+    }
 }
 

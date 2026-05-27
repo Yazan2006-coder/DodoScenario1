@@ -172,7 +172,7 @@ public class MyDodo extends Dodo
     while (!onEgg()) { // nog niet op een ei
         move(); // zet een stap       
     }
-}
+    }
     /**
      * Mimi will turn around and walk to the edge of the world, and afterwards
      * turn around to the original direction
@@ -181,7 +181,7 @@ public class MyDodo extends Dodo
     turn180();// draai om
     walkToWorldEdgePrintingCoordinates();// loop naar het begin van de rij
     turn180();// draai terug naar originele richting
-}
+    }
     /**
      * Mimi will keep moving until she finds a fence, when she finds a fence 
      * she will climb over it.
@@ -194,7 +194,7 @@ public class MyDodo extends Dodo
             move();                 // stap vooruit
         }
     }
-}
+    }
     /**
      * Mimi will walk to the edge of the world and look for grains, when she
      * walks over the grains the cooardinates will be printed
@@ -211,7 +211,7 @@ public class MyDodo extends Dodo
             pickUpGrainsAndPrintCoordinates();
         }
     }
-}
+    }
     /**
      * Mimi will turn 180 degress and take a step backwards, afterwards take
      * another 180 degrees turn and face the original direction.
@@ -220,7 +220,7 @@ public class MyDodo extends Dodo
     turn180(); // 180 graden draaien
     move();    // een stap zetten
     turn180(); // weer 180 graden draaien
-}
+    }
     /**
      * Mimi will walk to the edge of the world and lay eggs on nests she
      * finds ahead.
@@ -233,7 +233,7 @@ public class MyDodo extends Dodo
             layEgg();
         }
     }
-}
+    }
     /**
      * Mimi will look for nests and lay eggs on them. she will climb fences
      * when she finds fences ahead.
@@ -247,7 +247,7 @@ public class MyDodo extends Dodo
         }
     }
     layEgg(); // ei leggen als er een nest wordt gevonden
-}
+    }
     /**
      * Mimi will lay an egg and walk around the fenced area and stop at
      * the cell where the egg was placed.
@@ -273,5 +273,27 @@ public class MyDodo extends Dodo
             move();
         }
     }
+    }
+    /**
+     * Mimi will move and follow the eggs ahead and stop at the nest
+     */
+    public void faceNextEgg() {
+    turnLeft(); // begin met links kijken (nooit achteruit)
+    while (!eggAhead() && !nestAhead()) {
+        turnRight();
+    }
+    }
+     void walkToNextEgg() {
+    move(); // stap van huidig ei af
+    while (!onEgg() && !onNest()) {
+        move();
+    }
+    }
+    public void eggTrailToNest() {
+    while (!onNest()) {
+        faceNextEgg();
+        walkToNextEgg();
+    }
+    }
 }
-}
+

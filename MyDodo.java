@@ -295,14 +295,32 @@ public class MyDodo extends Dodo
         walkToNextEgg();
     }
     }
+    /**
+     * Mimi will keep walking in the maze and walk through openings 
+     * and stop when she finds the nest
+     */
     public void solveMaze() {
     while (!onNest()) {
-        turnLeft(); // nooit achteruit, begin met links
-        while (fenceAhead()) {
-            turnRight(); // draai totdat er een vrije weg is
+        turnRight();
+        if (!fenceAhead()) {
+            move();
+        } else {
+            turnLeft(); // terug naar originele richting
+            if (!fenceAhead()) {
+                move();
+            } else {
+                turnLeft();
+                if (!fenceAhead()) {
+                    move();
+                } else {
+                    turnLeft();
+                    move();
+                }
+            }
         }
-        move(); // zet een stap de vrije richting in
     }
     }
 }
+
+
 

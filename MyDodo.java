@@ -320,7 +320,19 @@ public class MyDodo extends Dodo
         }
     }
     }
+    /**
+     * Mimi faces direction
+     * 
+     * @param newDirection: the new direction mimi will face
+     */
+    public void faceDirection(int newDirection){
+        if (newDirection >= 0 && newDirection <= 3){
+            while (getDirection() != newDirection)
+            turnRight();
+        }
+    }
 }
+
 
 
 

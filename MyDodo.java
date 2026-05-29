@@ -339,6 +339,34 @@ public class MyDodo extends Dodo
     System.out.println("Blauw ei: " + waardeBlauweEi);
     System.out.println("Gouden ei: " + waardeGoudenEi);
     }
+    /**
+     * Moves Dodo to the cell with the given coordinates.
+     * First moves horizontally to the correct column,
+     * then vertically to the correct row.  
+     */
+    public boolean locationReached(int x, int y) {
+    return getX() == x && getY() == y;
+    }
+    public void goToLocation(int coordX, int coordY) {
+    // beweeg horizontaal
+    while (getX() != coordX) {
+        if (getX() < coordX) {
+            setDirection(EAST);  //naar rechts
+        } else {
+            setDirection(WEST);  //naar links
+        }
+        move();
+    }
+    // beweeg verticaal
+    while (getY() != coordY) {
+        if (getY() < coordY) {
+            setDirection(SOUTH); //naar beneden
+        } else {
+            setDirection(NORTH); //naar boven
+        }
+        move();
+    }
+    }   
 }
 
 

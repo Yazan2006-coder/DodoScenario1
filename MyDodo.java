@@ -348,25 +348,41 @@ public class MyDodo extends Dodo
     return getX() == x && getY() == y;
     }
     public void goToLocation(int coordX, int coordY) {
-    // beweeg horizontaal
+    if (!validCoordinates(coordX, coordY)) {
+        return; // stop als coordinaten ongeldig zijn
+    }
+    // move horizontally
     while (getX() != coordX) {
         if (getX() < coordX) {
-            setDirection(EAST);  //naar rechts
+            setDirection(EAST);
         } else {
-            setDirection(WEST);  //naar links
+            setDirection(WEST);
         }
         move();
     }
-    // beweeg verticaal
+    // move vertically
     while (getY() != coordY) {
         if (getY() < coordY) {
-            setDirection(SOUTH); //naar beneden
+            setDirection(SOUTH);
         } else {
-            setDirection(NORTH); //naar boven
+            setDirection(NORTH);
         }
         move();
     }
-    }   
+    }
+    /**
+     * Checks if the given coordinates are valid (within the world boundaries).
+     * Shows an error message if the coordinates are invalid.
+     * 
+     */
+    public boolean validCoordinates(int x, int y) {
+    if (x >= 0 && x < getWorld().getWidth() && y >= 0 && y < getWorld().getHeight()) {
+        return true;
+    } else {
+        showError("Invalid coordinates");
+        return false;
+    }
+    }
 }
 
 

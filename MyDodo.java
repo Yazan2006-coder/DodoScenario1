@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MyDodo extends Dodo
 {
     private int myNrOfEggsHatched;
-    
+    private int waardeBlauweEi = 2;
+    private int waardeGoudenEi = 10;
     public MyDodo() {
         super( EAST );
         myNrOfEggsHatched = 0;
@@ -330,6 +331,13 @@ public class MyDodo extends Dodo
             while (getDirection() != newDirection)
             turnRight();
         }
+    }
+    public void swapEggValues() {
+    int tijdelijkeWaardeEi = waardeBlauweEi; // sla blauw op
+    waardeBlauweEi = waardeGoudenEi; // blauw krijgt waarde van goud
+    waardeGoudenEi = tijdelijkeWaardeEi; // goud krijgt oude waarde van blauw
+    System.out.println("Blauw ei: " + waardeBlauweEi);
+    System.out.println("Gouden ei: " + waardeGoudenEi);
     }
 }
 

@@ -383,6 +383,30 @@ public class MyDodo extends Dodo
         return false;
     }
     }
+    /**
+     * Counts the number of eggs in the current row.
+     * Mimi walks to the end of the world counting eggs,
+     * then returns to the starting position facing the original direction.
+     */
+    public int countEggsInRow() {
+    int eggCount = 0;
+    // check huidige cel (eerste cel)
+    if (onEgg()) {
+        eggCount++;
+    }
+    // loop naar het einde en tel eieren
+    while (!borderAhead()) {
+        move();
+        if (onEgg()) {
+            eggCount++;
+        }
+    }
+    // terug naar beginpositie
+    goBackToStartOfRowAndFaceBack();
+    // toon compliment met het aantal eieren
+    showCompliment("Er zijn " + eggCount + " eieren in deze rij!");
+    return eggCount;
+    }
 }
 
 

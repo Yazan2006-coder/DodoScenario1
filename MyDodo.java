@@ -407,6 +407,29 @@ public class MyDodo extends Dodo
     showCompliment("Er zijn " + eggCount + " eieren in deze rij!");
     return eggCount;
     }
+    /**
+     * Lays a trail of eggs behind Mimi as she moves forward
+     * Mimi ends up standing on the last egg laid
+     */
+    public void layTrailOfEggs(int n) {
+    if (n < 1) {
+        showError("Invalid number of eggs: " + n);
+        return;
+    }
+    // leg eerste ei op huidige cel
+    layEgg();
+    // beweeg en leg de rest van de eieren
+    int eggsLaid = 1;
+    while (eggsLaid < n) {
+        if (!canMove()) {
+            showError("Not enough cells to lay " + n + " eggs!");
+            return;
+        }
+        move();
+        layEgg();
+        eggsLaid++;
+    }
+    }
 }
 
 

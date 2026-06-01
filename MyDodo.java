@@ -430,6 +430,30 @@ public class MyDodo extends Dodo
         eggsLaid++;
     }
     }
+    /**
+     * Counts all eggs in the world by going through each row.
+     * Mimi returns to her starting position after counting.
+     */
+    public int countAllEggs() {
+    int totalEggs = 0;
+    int startX = getX();
+    int startY = getY();
+    // loop door elke rij
+    int currentRow = 0;
+    while (currentRow < getWorld().getHeight()) {
+        // ga naar het begin van de rij
+        goToLocation(0, currentRow);
+        setDirection(EAST);
+        // tel eieren in deze rij en voeg toe aan totaal
+        totalEggs += countEggsInRow();
+        System.out.println("Rij " + currentRow + ": " + totalEggs + " eieren totaal");
+        currentRow++;
+    }
+    // terug naar beginpositie
+    goToLocation(startX, startY);
+    setDirection(EAST);
+    return totalEggs;
+    }
 }
 
 

@@ -454,6 +454,37 @@ public class MyDodo extends Dodo
     setDirection(EAST);
     return totalEggs;
     }
+    /**
+     * Finds the row with the most eggs in the world.
+     * Prints the row number to the console and returns to starting position.
+     * If multiple rows have the same maximum, the first row found is returned.
+     */
+    public int findRowWithMostEggs() {
+    int startX = getX();
+    int startY = getY();
+    int maxEggs = 0;
+    int bestRow = 0;
+    int currentRow = 0;
+    // loop door elke rij
+    while (currentRow < getWorld().getHeight()) {
+        goToLocation(0, currentRow);
+        setDirection(EAST);
+        int eggsInRow = countEggsInRow();
+        System.out.println("Rij " + currentRow + ": " + eggsInRow + " eieren");
+        // is deze rij beter dan de vorige beste?
+        if (eggsInRow > maxEggs) {
+            maxEggs = eggsInRow;
+            bestRow = currentRow;
+        }
+        currentRow++;
+    }
+    // terug naar beginpositie
+    goToLocation(startX, startY);
+    setDirection(EAST);
+    System.out.println("Rij met de meeste eieren: " + bestRow + " (" + maxEggs + " eieren)");
+    showCompliment("Rij met de meeste eieren: rij " + bestRow);
+    return bestRow;
+    }
 }
 
 

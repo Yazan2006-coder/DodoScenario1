@@ -485,6 +485,23 @@ public class MyDodo extends Dodo
     showCompliment("Rij met de meeste eieren: rij " + bestRow);
     return bestRow;
     }
+    /**
+     * Mimi lays a monument of eggs on top eachother
+     */
+    public void eggMonument() {
+    int startX = getX();
+    int startY = getY();
+    int row = 0;
+    while (startY + row < getWorld().getHeight()) {
+    int col = 0;
+    while (col <= row && startX + col < getWorld().getWidth()) {
+        setLocation(startX + col, startY + row);
+        if (canLayEgg()) layEgg();
+        col++;
+    }
+    row++;
+    }
+    }
 }
 
 

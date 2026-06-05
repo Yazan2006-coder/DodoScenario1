@@ -491,15 +491,15 @@ public class MyDodo extends Dodo
     public void eggMonument() {
     int startX = getX();
     int startY = getY();
-    int row = 0;
-    while (startY + row < getWorld().getHeight()) {
+    int currentRow = 0;
+    while (startY + currentRow < getWorld().getHeight()) {
     int monu = 0;
-    while (monu <= row && startX + monu < getWorld().getWidth()) {
-        setLocation(startX + monu, startY + row);
+    while (monu <= currentRow && startX + monu < getWorld().getWidth()) {
+        setLocation(startX + monu, startY + currentRow);
         if (canLayEgg()) layEgg();
         monu++;
     }
-    row++;
+    currentRow++;
     }
     }
     /**
@@ -510,10 +510,10 @@ public class MyDodo extends Dodo
     public void strongerMonument() {
     int startX = getX();
     int startY = getY();
-    int row = 0;
+    int currentRow = 0;
     int eggsToLay = 1; // begin met 1 ei
-    while (startY + row < getWorld().getHeight()) {
-        goToLocation(startX, startY + row);
+    while (startY + currentRow < getWorld().getHeight()) {
+        goToLocation(startX, startY + currentRow);
         setDirection(EAST);
         int eggsLaid = 0;
         while (eggsLaid < eggsToLay) {
@@ -526,7 +526,7 @@ public class MyDodo extends Dodo
             }
         }
         // leg eieren
-        row++;
+        currentRow++;
         eggsToLay = eggsToLay * 2; // verdubbel voor volgende rij
     }
     // terug naar beginpositie
@@ -567,6 +567,30 @@ public class MyDodo extends Dodo
     // terug naar beginpositie
     goToLocation(startX, startY);
     setDirection(EAST);
+    }
+    /**
+     * Calculates the average number of eggs per row in the world.
+     * Uses typecasting to return a double value.
+     */
+    public double averageEggsPerRow() {
+    int totalEggs = 0;
+    int totalRows = getWorld().getHeight();
+    int currentRow = 0;
+    while (currentRow < totalRows) {
+        goToLocation(0, currentRow);
+        setDirection(EAST);
+        totalEggs += countEggsInRow();
+        currentRow++;
+    }
+    // terug naar beginpositie
+    goToLocation(0, 0);
+    setDirection(EAST);
+    // typecast naar double voor kommagetal
+    double average = (double) totalEggs / totalRows;
+    System.out.println("Totaal eieren: " + totalEggs);
+    System.out.println("Totaal rijen: " + totalRows);
+    System.out.println("Gemiddelde: " + average);
+    return average;
     }
 }
 

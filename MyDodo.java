@@ -533,6 +533,41 @@ public class MyDodo extends Dodo
     goToLocation(startX, startY);
     setDirection(EAST);
     }
+    /**
+     * Fills the world as much as possible with a pyramid pattern
+     */
+    public void buildPyramid() {
+    int startX = getX();
+    int startY = getY();
+    int currentRow = 0;
+    int eggsToLay = 1;
+    int worldWidth = getWorld().getWidth();
+    while (startY + currentRow < getWorld().getHeight()) {
+        // stop als eieren niet meer passen
+        if (eggsToLay > worldWidth) {
+            break;
+        }
+        // bereken startpositie gecentreerd
+        int rowStartX = startX + (worldWidth / 2) - (eggsToLay / 2);
+        // ga naar begin van deze rij
+        goToLocation(rowStartX, startY + currentRow);
+        setDirection(EAST);
+        // leg eieren
+        int eggsLaid = 0;
+        while (eggsLaid < eggsToLay && canMove()) {
+            layEgg();
+            eggsLaid++;
+            if (eggsLaid < eggsToLay) {
+                move();
+            }
+        }
+        currentRow++;
+        eggsToLay = eggsToLay + 2; // elke rij 2 meer
+    }
+    // terug naar beginpositie
+    goToLocation(startX, startY);
+    setDirection(EAST);
+    }
 }
 
 

@@ -486,21 +486,52 @@ public class MyDodo extends Dodo
     return bestRow;
     }
     /**
-     * Mimi lays a monument of eggs on top eachother
+     * Mimi lays a monument of eggs on top eachother from its current position
      */
     public void eggMonument() {
     int startX = getX();
     int startY = getY();
     int row = 0;
     while (startY + row < getWorld().getHeight()) {
-    int col = 0;
-    while (col <= row && startX + col < getWorld().getWidth()) {
-        setLocation(startX + col, startY + row);
+    int monu = 0;
+    while (monu <= row && startX + monu < getWorld().getWidth()) {
+        setLocation(startX + monu, startY + row);
         if (canLayEgg()) layEgg();
-        col++;
+        monu++;
     }
     row++;
     }
+    }
+    /**
+     * Fills the world with a monument from Mimi's current position.
+     * Each row contains double the amount of eggs
+     * compared to the row above it.
+     */
+    public void strongerMonument() {
+    int startX = getX();
+    int startY = getY();
+    int row = 0;
+    int eggsToLay = 1; // begin met 1 ei
+    while (startY + row < getWorld().getHeight()) {
+        goToLocation(startX, startY + row);
+        setDirection(EAST);
+        int eggsLaid = 0;
+        while (eggsLaid < eggsToLay) {
+            layEgg();
+            eggsLaid++;
+            if (eggsLaid < eggsToLay && canMove()) {
+                move();
+            } else {
+                break; // rand bereikt, stop met deze rij
+            }
+        }
+        // leg eieren
+        row++;
+        eggsToLay = eggsToLay * 2; // verdubbel voor volgende rij
+    }
+    // terug naar beginpositie
+    goToLocation(startX, startY);
+    setDirection(EAST);
     }
 }
 

@@ -592,6 +592,67 @@ public class MyDodo extends Dodo
     System.out.println("Gemiddelde: " + average);
     return average;
     }
+    /**
+     * Counts the number of eggs in the column.
+     */
+    public int countEggsInColumn(int column) {
+    int eggCount = 0;
+    int currentRow = 0;
+    while (currentRow < getWorld().getHeight()) {
+        goToLocation(column, currentRow);
+        if (onEgg()) {
+            eggCount++;
+        }
+        currentRow++;
+    }
+    return eggCount;
+    }
+    /**
+     * Adds a parity egg to each row that has an odd number of eggs.
+     * A golden egg is placed at the end of the row.
+     */
+    public void addRowParityBits() {
+    int currentRow = 0;
+    while (currentRow < getWorld().getHeight()) {
+        goToLocation(0, currentRow);
+        setDirection(EAST);
+        int eggsInRow = countEggsInRow();
+        //gouden ei toevoegen aan het einde
+        if (eggsInRow % 2 != 0) {
+            goToLocation(getWorld().getWidth() - 1, currentRow);
+            getWorld().addObject(new GoldenEgg(), getX(), getY());
+        }
+        currentRow++;
+    }
+    }
+    /**
+     * Adds a parity egg to each column that has an odd number of eggs.
+     * A golden egg is placed at the bottom of the column.
+     */
+    public void addColumnParityBits() {
+    int currentColumn = 0;
+    while (currentColumn < getWorld().getWidth()) {
+        int eggsInColumn = countEggsInColumn(currentColumn);
+        //gouden ei toevoegen onderaan
+        if (eggsInColumn % 2 != 0) {
+            goToLocation(currentColumn, getWorld().getHeight() - 1);
+            getWorld().addObject(new GoldenEgg(), getX(), getY());
+        }
+        currentColumn++;
+    }
+    }
+    /**
+     * Prepares the world with parity bits for all rows and columns.
+     * Adds golden eggs to rows and columns with odd egg counts
+     */
+    public void addParityBits() {
+    addRowParityBits();    // eerst rijen
+    addColumnParityBits(); // dan kolommen
+    // terug naar beginpositie
+    goToLocation(0, 0);
+    setDirection(EAST);
+    showCompliment("Pariteitsbit algoritme klaar!");
+    }
 }
 
 

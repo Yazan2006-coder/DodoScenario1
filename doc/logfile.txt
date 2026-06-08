@@ -20,22 +20,22 @@ C:\Users\Yazan\Downloads\DodoScenario1\doc
 windows-1252
 -charset
 windows-1252
-C:\Users\Yazan\Downloads\DodoScenario1\MyDodo.java
+C:\Users\Yazan\Downloads\DodoScenario1\Mauritius.java
 <---- end of javadoc command ---->
-Loading source file C:\Users\Yazan\Downloads\DodoScenario1\MyDodo.java...
+Loading source file C:\Users\Yazan\Downloads\DodoScenario1\Mauritius.java...
 Constructing Javadoc information...
 warning: unknown enum constant Tag.Any
   reason: class file for threadchecker.Tag not found
 warning: unknown enum constant Tag.Any
+warning: unknown enum constant Tag.Any
+warning: unknown enum constant Tag.Any
 Standard Doclet version 21.0.4+7-LTS
 Building tree for all the packages and classes...
-Generating C:\Users\Yazan\Downloads\DodoScenario1\doc\MyDodo.html...
-C:\Users\Yazan\Downloads\DodoScenario1\MyDodo.java:5: warning: invalid input: '&'
+Generating C:\Users\Yazan\Downloads\DodoScenario1\doc\Mauritius.html...
+C:\Users\Yazan\Downloads\DodoScenario1\Mauritius.java:14: warning: invalid input: '&'
  * @author Sjaak Smetsers & Renske Smetsers-Weeda
                           ^
-C:\Users\Yazan\Downloads\DodoScenario1\MyDodo.java:87: warning: @param argument "int" is not a parameter name.
-     * @param   int distance: the number of steps made
-       ^
 Generating C:\Users\Yazan\Downloads\DodoScenario1\doc\package-summary.html...
+Generating C:\Users\Yazan\Downloads\DodoScenario1\doc\constant-values.html...
 Generating C:\Users\Yazan\Downloads\DodoScenario1\doc\index.html...
-4 warnings
+5 warnings

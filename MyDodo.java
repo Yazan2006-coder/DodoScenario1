@@ -653,6 +653,46 @@ public class MyDodo extends Dodo
     setDirection(EAST);
     showCompliment("Pariteitsbit algoritme klaar!");
     }
+    /**
+     * Detects errors in the world using the parity bit algorithm.
+     * Checks all rows and columns for odd egg counts.
+     * Prints the location of the error if found.
+     */
+    public void detectError() {
+    int errorRow = -1;    // -1 betekent geen fout gevonden
+    int errorColumn = -1;
+    // controleer alle rijen
+    int currentRow = 0;
+    while (currentRow < getWorld().getHeight()) {
+        goToLocation(0, currentRow);
+        setDirection(EAST);
+        int eggsInRow = countEggsInRow();
+        if (eggsInRow % 2 != 0) {
+            errorRow = currentRow;
+        }
+        currentRow++;
+    }
+    // controleer alle kolommen
+    int currentColumn = 0;
+    while (currentColumn < getWorld().getWidth()) {
+        int eggsInColumn = countEggsInColumn(currentColumn);
+        if (eggsInColumn % 2 != 0) {
+            errorColumn = currentColumn;
+        }
+        currentColumn++;
+    }
+    // terug naar beginpositie
+    goToLocation(0, 0);
+    setDirection(EAST);
+    // resultaat bepalen
+    if (errorRow == -1 && errorColumn == -1) {
+        showCompliment("Geen fout gevonden!");
+        System.out.println("Geen fout gevonden.");
+    } else {
+        System.out.println("Fout gevonden op rij: " + errorRow + ", kolom: " + errorColumn);
+        showCompliment("Fout op coordinaten (" + errorColumn + ", " + errorRow + ")");
+    }
+    }
 }
 
 

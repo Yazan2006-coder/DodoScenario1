@@ -693,6 +693,80 @@ public class MyDodo extends Dodo
         showCompliment("Fout op coordinaten (" + errorColumn + ", " + errorRow + ")");
     }
     }
+    /**
+     * Finds the row with an odd number of eggs (the incorrect row).
+     * Returns -1 if no incorrect row is found.
+     */
+    public int getIncorrectRowNr() {
+    int currentRow = 0;
+    while (currentRow < getWorld().getHeight()) {
+        goToLocation(0, currentRow);
+        setDirection(EAST);
+        if (countEggsInRow() % 2 != 0) {
+            return currentRow; // foute rij gevonden
+        }
+        currentRow++;
+    }
+    return -1; // geen foute rij
+    }
+    /**
+     * Finds the column with an odd number of eggs (the incorrect column).
+     * Returns -1 if no incorrect column is found.
+     */
+    public int getIncorrectColumnNr() {
+    int currentColumn = 0;
+    while (currentColumn < getWorld().getWidth()) {
+        if (countEggsInColumn(currentColumn) % 2 != 0) {
+            return currentColumn; // foute kolom gevonden
+        }
+        currentColumn++;
+    }
+    return -1; // geen foute kolom
+    }
+    /**
+     * Moves Dodo to the location of the incorrect bit.
+     * Uses the incorrect row and column numbers to find the location.
+     */
+    public boolean gotoIncorrectBit() {
+    int errorRow = getIncorrectRowNr();
+    int errorColumn = getIncorrectColumnNr();
+    if (errorRow == -1 || errorColumn == -1) {
+        System.out.println("Geen fout gevonden!");
+        return false; // geen fout
+    }
+    goToLocation(errorColumn, errorRow);
+    System.out.println("Fout gevonden op: (" + errorColumn + ", " + errorRow + ")");
+    return true; // fout gevonden
+    }
+    /**
+     * Fixes the incorrect bit by either adding or removing an egg.
+     * If there is an egg at the location, it is removed.
+     * If there is no egg, one is added.
+     */
+    public void fixIncorrectBit() {
+    if (onEgg()) {
+        pickUpEgg(); // extra ei ? verwijder het
+        System.out.println("Extra ei verwijderd!");
+    } else {
+        layEgg(); // ontbrekend ei ? voeg toe
+        System.out.println("Ontbrekend ei toegevoegd!");
+    }
+    }
+    /**
+     * Checks if the world is damaged and repairs it.
+     * Uses parity bit algorithm to find and fix errors.
+     */
+    public void repairWorld() {
+    if (gotoIncorrectBit()) {
+        fixIncorrectBit(); // herstel de fout
+        showCompliment("Wereld hersteld!");
+    } else {
+        showCompliment("Wereld is niet beschadigd!");
+    }
+    // terug naar beginpositie
+    goToLocation(0, 0);
+    setDirection(EAST);
+    }
 }
 
 

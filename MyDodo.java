@@ -767,6 +767,7 @@ public class MyDodo extends Dodo
     goToLocation(0, 0);
     setDirection(EAST);
     }
+    
     /**
      * Counts eggs in a line from Mimi's current position to the world edge.
      * Works for both rows and columns depending on Mimi's direction.
